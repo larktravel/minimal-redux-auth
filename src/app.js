@@ -29,6 +29,7 @@ class App extends React.Component {
 }
 
 export function initialize({cookies, isServer, currentLocation, userAgent} = {}) {
+  console.log('what the fuck are cookies', cookies, isServer, currentLocation)
   var reducer = combineReducers({
     auth:   authStateReducer,
     router: routerStateReducer,
@@ -84,19 +85,23 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
   return store.dispatch(configure([
     {
       default: {
-        apiUrl: __API_URL__
+        apiUrl: __API_URL__,
+        signOutPath:           "/profile/sign_out",
+        emailSignInPath:       "/profile/sign_in",
+        emailRegistrationPath: "/profile/sign_up",
+        passwordResetPath:     "/profile/password",
+        passwordUpdatePath:    "/profile/password",
+        tokenValidationPath:   "/profile/validate_token"
       }
     }, {
       evilUser: {
         apiUrl:                __API_URL__,
-        signOutPath:           "/mangs/sign_out",
-        emailSignInPath:       "/mangs/sign_in",
-        emailRegistrationPath: "/mangs",
-        accountUpdatePath:     "/mangs",
-        accountDeletePath:     "/mangs",
-        passwordResetPath:     "/mangs/password",
-        passwordUpdatePath:    "/mangs/password",
-        tokenValidationPath:   "/mangs/validate_token",
+        signOutPath:           "/profile/sign_out",
+        emailSignInPath:       "/profile/sign_in",
+        emailRegistrationPath: "/profile/sign_up",
+        passwordResetPath:     "/profile/password",
+        passwordUpdatePath:    "/profile/password",
+        tokenValidationPath:   "/profile/validate_token",
         authProviderPaths: {
           github:    "/mangs/github",
           facebook:  "/mangs/facebook",
@@ -109,6 +114,7 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
     isServer,
     currentLocation
   })).then(({redirectPath, blank} = {}) => {
+    console.log('what is blank', blank)
     // hack for material-ui server-side rendering.
     // see https://github.com/callemall/material-ui/pull/2007
     if (userAgent) {
