@@ -20,7 +20,6 @@
     "transmit"
   ],
   "scripts": {
-    "start": "node --harmony ./babel.server",
     "postinstall": "npm run build",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack.config.js",
     "watch-client": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config webpack.client-watch.js && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.client-watch.js",
