@@ -4,13 +4,13 @@ import {ReduxRouter} from "redux-router";
 import {Route, IndexRoute} from "react-router";
 import {configure, authStateReducer} from "redux-auth";
 import {createStore, compose, applyMiddleware} from "redux";
-import {createHistory, createMemoryHistory} from "history";
+import {createHistory} from "history";
 import {routerStateReducer, reduxReactRouter as clientRouter} from "redux-router";
-import { reduxReactRouter as serverRouter } from "redux-router/server";
 import {combineReducers} from "redux";
+import thunk from "redux-thunk";
+
 import demoButtons from "./reducers/request-test-buttons";
 import demoUi from "./reducers/demo-ui";
-import thunk from "redux-thunk";
 import Container from "./views/partials/Container";
 import Main from "./views/Main";
 import Account from "./views/Account";
@@ -21,15 +21,14 @@ class App extends React.Component {
   render() {
     return (
       <Container>
-        <GlobalComponents />
+        <GlobalComponents /> {/*this adds the modals.  Tis optional*/}
         {this.props.children}
       </Container>
     );
   }
 }
 
-export function initialize({cookies, isServer, currentLocation, userAgent} = {}) {
-  console.log('what the fuck are cookies', cookies, isServer, currentLocation)
+export function initialize() {
   var reducer = combineReducers({
     auth:   authStateReducer,
     router: routerStateReducer,
@@ -64,10 +63,6 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
   // these methods will differ from server to client
   var reduxReactRouter    = clientRouter;
   var createHistoryMethod = createHistory;
-  if (isServer) {
-    reduxReactRouter    = serverRouter;
-    createHistoryMethod = createMemoryHistory;
-  }
 
   // create the redux store
   store = compose(
@@ -109,27 +104,11 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
         }
       }
     }
-  ], {
-    cookies,
-    isServer,
-    currentLocation
-  })).then(({redirectPath, blank} = {}) => {
-    console.log('what is blank', blank)
-    // hack for material-ui server-side rendering.
-    // see https://github.com/callemall/material-ui/pull/2007
-    if (userAgent) {
-      global.navigator = {userAgent};
-    }
-
-    return ({
-      blank,
-      store,
-      redirectPath,
-      provider: (
-        <Provider store={store} key="provider">
-          <ReduxRouter children={routes} />
-        </Provider>
-      )
-    });
+  ])).then(() => {
+    return (
+      <Provider store={store} key="provider">
+        <ReduxRouter children={routes} />
+      </Provider>
+    );
   });
 }
