@@ -14,6 +14,9 @@ module.exports = {
     chunkFilename: "[name].[id].js",
     publicPath:    "dist/"
   },
+  devServer: {
+    contentBase: './static/dist'
+  },
   plugins: [
     new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false}),
     new webpack.DefinePlugin({"process.env": {NODE_ENV: "\"production\""}}),
