@@ -22,7 +22,6 @@ class Main extends React.Component {
   }
 
   render () {
-    console.log("page endpoint", this.props.pageEndpoint);
     let Theme = MUITheme;
     let themePath = "/material-ui-theme";
     let endpointAttr = (this.props.pageEndpoint === "default")
@@ -46,7 +45,7 @@ class Main extends React.Component {
 
     return (
       <div>
-        <PageHeader>
+{ /*       <PageHeader>
           Redux Auth
 
           <OverlayTrigger overlay={deployTooltip} placement="left">
@@ -116,11 +115,11 @@ class Main extends React.Component {
                 </tr>
               </tbody>
             </Table>
-          </IndexPanel>
+          </IndexPanel>*/}
 
           <IndexPanel header="Email Sign In">
             <ExampleWell>
-              <Theme.EmailSignInForm endpoint={this.props.pageEndpoint} />
+              <Theme.EmailSignInForm />
             </ExampleWell>
 
             <CodeSnippet>
@@ -150,106 +149,106 @@ class Main extends React.Component {
             </CodeSnippet>
           </IndexPanel>
 
-          <IndexPanel header="Email Sign Up">
-            <ExampleWell>
-              <Theme.EmailSignUpForm endpoint={this.props.pageEndpoint} />
-            </ExampleWell>
+         {/* <IndexPanel header="Email Sign Up">
+                     <ExampleWell>
+                       <Theme.EmailSignUpForm endpoint={this.props.pageEndpoint} />
+                     </ExampleWell>
 
-            <CodeSnippet>
-              {`
-                // import
-                import {EmailSignUpForm} from "redux-auth${themePath}";
+                     <CodeSnippet>
+                       {`
+                         // import
+                         import {EmailSignUpForm} from "redux-auth${themePath}";
 
-                // render
-                <EmailSignUpForm ${endpointAttr} />
-              `}
-            </CodeSnippet>
-          </IndexPanel>
+                         // render
+                         <EmailSignUpForm ${endpointAttr} />
+                       `}
+                     </CodeSnippet>
+                   </IndexPanel>
 
-          <IndexPanel header="OAuth Sign In">
-            <ExampleWell>
-              <ButtonGroup>
-                <Theme.OAuthSignInButton
-                  provider="github"
-                  endpoint={this.props.pageEndpoint}>
-                  Github
-                </Theme.OAuthSignInButton>
-                <Theme.OAuthSignInButton
-                  provider="facebook"
-                  endpoint={this.props.pageEndpoint}
-                  secondary={true}
-                  bsStyle="primary">
-                  Facebook
-                </Theme.OAuthSignInButton>
-                <Theme.OAuthSignInButton
-                  provider="google"
-                  endpoint={this.props.pageEndpoint}
-                  primary={true}
-                  bsStyle="warning">
-                  Google
-                </Theme.OAuthSignInButton>
-              </ButtonGroup>
-            </ExampleWell>
+                   <IndexPanel header="OAuth Sign In">
+                     <ExampleWell>
+                       <ButtonGroup>
+                         <Theme.OAuthSignInButton
+                           provider="github"
+                           endpoint={this.props.pageEndpoint}>
+                           Github
+                         </Theme.OAuthSignInButton>
+                         <Theme.OAuthSignInButton
+                           provider="facebook"
+                           endpoint={this.props.pageEndpoint}
+                           secondary={true}
+                           bsStyle="primary">
+                           Facebook
+                         </Theme.OAuthSignInButton>
+                         <Theme.OAuthSignInButton
+                           provider="google"
+                           endpoint={this.props.pageEndpoint}
+                           primary={true}
+                           bsStyle="warning">
+                           Google
+                         </Theme.OAuthSignInButton>
+                       </ButtonGroup>
+                     </ExampleWell>
 
-            <CodeSnippet>
-              {`
-                // import
-                import {OAuthSignInButton} from "redux-auth${themePath}";
+                     <CodeSnippet>
+                       {`
+                         // import
+                         import {OAuthSignInButton} from "redux-auth${themePath}";
 
-                // render
-                <OAuthSignInButton provider="github" ${endpointAttr} />
-              `}
-            </CodeSnippet>
-          </IndexPanel>
+                         // render
+                         <OAuthSignInButton provider="github" ${endpointAttr} />
+                       `}
+                     </CodeSnippet>
+                   </IndexPanel>
 
-          <IndexPanel header="Destroy Account" bsStyle="danger">
-            <ExampleWell>
-              <Theme.DestroyAccountButton endpoint={this.props.pageEndpoint} bsStyle="danger" />
-            </ExampleWell>
+                   <IndexPanel header="Destroy Account" bsStyle="danger">
+                     <ExampleWell>
+                       <Theme.DestroyAccountButton endpoint={this.props.pageEndpoint} bsStyle="danger" />
+                     </ExampleWell>
 
-            <CodeSnippet>
-              {`
-                // import
-                import {DestroyAccountButton} from "redux-auth${themePath}";
+                     <CodeSnippet>
+                       {`
+                         // import
+                         import {DestroyAccountButton} from "redux-auth${themePath}";
 
-                // render
-                <DestroyAccountButton ${endpointAttr} />
-              `}
-            </CodeSnippet>
-          </IndexPanel>
+                         // render
+                         <DestroyAccountButton ${endpointAttr} />
+                       `}
+                     </CodeSnippet>
+                   </IndexPanel>
 
-          <IndexPanel header="Request Password Reset">
-            <ExampleWell>
-              <Theme.RequestPasswordResetForm endpoint={this.props.pageEndpoint} />
-            </ExampleWell>
+                   <IndexPanel header="Request Password Reset">
+                     <ExampleWell>
+                       <Theme.RequestPasswordResetForm endpoint={this.props.pageEndpoint} />
+                     </ExampleWell>
 
-            <CodeSnippet>
-              {`
-                // import
-                import {RequestPasswordResetForm} from "redux-auth${themePath}";
+                     <CodeSnippet>
+                       {`
+                         // import
+                         import {RequestPasswordResetForm} from "redux-auth${themePath}";
 
-                // render
-                <RequestPasswordResetForm ${endpointAttr} />
-              `}
-            </CodeSnippet>
-          </IndexPanel>
+                         // render
+                         <RequestPasswordResetForm ${endpointAttr} />
+                       `}
+                     </CodeSnippet>
+                   </IndexPanel>
 
-          <IndexPanel header="Update Password">
-            <ExampleWell>
-              <Theme.UpdatePasswordForm endpoint={this.props.pageEndpoint} />
-            </ExampleWell>
+                   <IndexPanel header="Update Password">
+                     <ExampleWell>
+                       <Theme.UpdatePasswordForm endpoint={this.props.pageEndpoint} />
+                     </ExampleWell>
 
-            <CodeSnippet>
-              {`
-                // import
-                import {UpdatePasswordForm} from "redux-auth${themePath}";
+                     <CodeSnippet>
+                       {`
+                         // import
+                         import {UpdatePasswordForm} from "redux-auth${themePath}";
 
-                // render
-                <UpdatePasswordForm ${endpointAttr} />
-              `}
-            </CodeSnippet>
-          </IndexPanel>
-        </Row>
+                         // render
+                         <UpdatePasswordForm ${endpointAttr} />
+                       `}
+                     </CodeSnippet>
+                   </IndexPanel>
+                 </Row>*/}
       </div>
     );
   }

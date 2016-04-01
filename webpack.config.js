@@ -6,7 +6,7 @@ module.exports = {
   target:  "web",
   cache:   false,
   context: __dirname,
-  devtool: false,
+  devtool: 'source-map',
   entry:   ["./src/client"],
   output:  {
     path:          path.join(__dirname, "static/dist"),

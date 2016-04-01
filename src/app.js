@@ -32,7 +32,7 @@ export function initialize() {
   var reducer = combineReducers({
     auth:   authStateReducer,
     router: routerStateReducer,
-    demoButtons,
+    demoButtons, // demoButtons and demoUI not really necessary
     demoUi
   });
 
@@ -77,34 +77,15 @@ export function initialize() {
   /**
    * The React Router 1.0 routes for both the server and the client.
    */
-  return store.dispatch(configure([
-    {
-      default: {
-        apiUrl: __API_URL__,
-        signOutPath:           "/profile/sign_out",
-        emailSignInPath:       "/profile/sign_in",
-        emailRegistrationPath: "/profile/sign_up",
-        passwordResetPath:     "/profile/password",
-        passwordUpdatePath:    "/profile/password",
-        tokenValidationPath:   "/profile/validate_token"
-      }
-    }, {
-      evilUser: {
-        apiUrl:                __API_URL__,
-        signOutPath:           "/profile/sign_out",
-        emailSignInPath:       "/profile/sign_in",
-        emailRegistrationPath: "/profile/sign_up",
-        passwordResetPath:     "/profile/password",
-        passwordUpdatePath:    "/profile/password",
-        tokenValidationPath:   "/profile/validate_token",
-        authProviderPaths: {
-          github:    "/mangs/github",
-          facebook:  "/mangs/facebook",
-          google:    "/mangs/google_oauth2"
-        }
-      }
-    }
-  ])).then(() => {
+  return store.dispatch(configure({
+    apiUrl: __API_URL__,
+    signOutPath:           "/profile/sign_out",
+    emailSignInPath:       "/profile/sign_in",
+    emailRegistrationPath: "/profile/sign_up",
+    passwordResetPath:     "/profile/password",
+    passwordUpdatePath:    "/profile/password",
+    tokenValidationPath:   "/profile/validate_token"
+  })).then(() => {
     return (
       <Provider store={store} key="provider">
         <ReduxRouter children={routes} />

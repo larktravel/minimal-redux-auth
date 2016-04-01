@@ -18,6 +18,7 @@ class GlobalComponents extends React.Component {
         Theme = BSTheme;
         break;
     }
+    console.log('Theme.AuthGlobals', Theme.AuthGlobals)
 
     return (
       <div>
